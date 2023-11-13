@@ -1,9 +1,11 @@
 var express = require('express');
+var passport = require('passport');
+
 const { calculation } = require('../modules/calculator.service');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', passport.authenticate('basic', { session: false }), function (req, res, next) {
   const { expression } = req.query;
 
   if (!expression) {
