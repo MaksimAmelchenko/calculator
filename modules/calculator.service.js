@@ -21,12 +21,13 @@ function isOperator(value) {
 function calculation(expression) {
   const stack = [];
 
-  console.log(expression.trim().replace(/\s+/g, ' '));
-
   let normalizedInput = expression.trim().replace(/\s+/g, ' ');
 
   const lexemes = parser(normalizedInput);
-  console.log({ lexemes });
+
+  if (lexemes.length < 3) {
+    throw new Error('Invalid input format: there are not enough lexemes');
+  }
 
   for (const lexeme of lexemes) {
     if (isOperator(lexeme)) {
