@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "8ae999ee-a093-493c-a2e2-d04c14cbc2e0",
+		"name": "calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2136592"
+	},
+	"item": [
+		{
+			"name": "calculate",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/?expression=1%202%20%2B%0A",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "expression",
+							"value": "1%202%20%2B%0A"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
