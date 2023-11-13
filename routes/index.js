@@ -1,15 +1,16 @@
-var express = require('express');
-var passport = require('passport');
+const express = require('express');
+const passport = require('passport');
 
 const { calculation } = require('../modules/calculator.service');
-var router = express.Router();
+const { InvalidParametersError } = require('../lib/errors/invalid-parameters-error');
 
-/* GET home page. */
+const router = express.Router();
+
 router.get('/', passport.authenticate('basic', { session: false }), function (req, res, next) {
   const { expression } = req.query;
 
   if (!expression) {
-    throw new Error('Expression is required');
+    throw new InvalidParametersError('1Expression is required');
   }
 
   const result = calculation(expression);

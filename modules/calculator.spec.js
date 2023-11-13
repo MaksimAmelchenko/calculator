@@ -1,8 +1,7 @@
-// Write test for calculator on Mocha
-
 const expect = require('chai').expect;
 
 const { calculation } = require('./calculator.service');
+const { InvalidParametersError } = require('../lib/errors/invalid-parameters-error');
 
 describe('calculator', () => {
   it('should calculate expression', () => {
@@ -16,14 +15,23 @@ describe('calculator', () => {
   });
 
   it('should catch error', () => {
-    expect(() => calculation('7 45 1')).to.throw('Invalid input format: there are not enough operators');
+    expect(() => calculation('7 45 1')).to.throw(
+      InvalidParametersError,
+      'Invalid input format: there are not enough operators',
+    );
   });
 
   it('should catch error', () => {
-    expect(() => calculation('7 45 ')).to.throw('Invalid input format: there are not enough lexemes');
+    expect(() => calculation('7 45 ')).to.throw(
+      InvalidParametersError,
+      'Invalid input format: there are not enough lexemes',
+    );
   });
 
   it('should catch error', () => {
-    expect(() => calculation('7 45 + +')).to.throw('Invalid input format: there are not enough operands');
+    expect(() => calculation('7 45 + +')).to.throw(
+      InvalidParametersError,
+      'Invalid input format: there are not enough operands',
+    );
   });
 });

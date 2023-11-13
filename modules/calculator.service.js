@@ -1,8 +1,5 @@
-// 8 9 + 1 7 - *
+const { InvalidParametersError } = require('../lib/errors/invalid-parameters-error');
 
-/*
-  input - normalized string with numbers and operators
-* */
 function parser(input) {
   return input.split(' ').map(value => {
     // validate
@@ -18,6 +15,11 @@ function isOperator(value) {
   return ['+', '-', '/', '*'].includes(value);
 }
 
+/*
+  @param {string} expression - expression to calculate (normalized string with numbers and operators)
+  @returns {number} - result of calculation
+*/
+
 function calculation(expression) {
   const stack = [];
 
@@ -26,13 +28,13 @@ function calculation(expression) {
   const lexemes = parser(normalizedInput);
 
   if (lexemes.length < 3) {
-    throw new Error('Invalid input format: there are not enough lexemes');
+    throw new InvalidParametersError('Invalid input format: there are not enough lexemes');
   }
 
   for (const lexeme of lexemes) {
     if (isOperator(lexeme)) {
       if (stack.length < 2) {
-        throw new Error('Invalid input format: there are not enough operands');
+        throw new InvalidParametersError('Invalid input format: there are not enough operands');
       }
 
       const operand2 = stack.pop();
@@ -71,7 +73,7 @@ function calculation(expression) {
 
   if (stack.length !== 1) {
     console.log({ stack });
-    throw new Error('Invalid input format: there are not enough operators');
+    throw new InvalidParametersError('Invalid input format: there are not enough operators');
   }
 
   return stack.pop();
